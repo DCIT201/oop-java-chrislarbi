@@ -1,6 +1,7 @@
-package com.ChrisLarbi;
+package ChrisLarbi.VehicleRental;
 
-public abstract class Vehicle {
+// Abstract Class: Vehicle
+abstract class Vehicle {
     private String vehicleId;
     private String model;
     private double baseRentalRate;
@@ -10,7 +11,7 @@ public abstract class Vehicle {
         this.vehicleId = vehicleId;
         this.model = model;
         this.baseRentalRate = baseRentalRate;
-        this.isAvailable = true;
+        this.isAvailable = true; // Default to available
     }
 
     public String getVehicleId() {
@@ -36,9 +37,5 @@ public abstract class Vehicle {
     public abstract double calculateRentalCost(int days);
 
     public abstract boolean isAvailableForRental();
-
-    @Override
-    public String toString() {
-        return "Vehicle [ID=" + vehicleId + ", Model=" + model + "]";
-    }
 }
+

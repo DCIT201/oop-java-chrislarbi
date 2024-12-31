@@ -1,16 +1,18 @@
-package com.ChrisLarbi;
+package ChrisLarbi.VehicleRental;
 
-public class Truck extends Vehicle {
-    private double cargoFee;
+// Concrete Class: Truck
+public class Truck extends Vehicle implements Rentable {
 
-    public Truck(String vehicleId, String model, double baseRentalRate, double cargoFee) {
+    private double loadCapacity;
+
+    public Truck(String vehicleId, String model, double baseRentalRate, double loadCapacity) {
         super(vehicleId, model, baseRentalRate);
-        this.cargoFee = cargoFee;
+        this.loadCapacity = loadCapacity;
     }
 
     @Override
     public double calculateRentalCost(int days) {
-        return getBaseRentalRate() * days + cargoFee;
+        return getBaseRentalRate() * days + (loadCapacity > 1000 ? 20 * days : 0); // Additional fee for heavy loads
     }
 
     @Override
@@ -19,7 +21,18 @@ public class Truck extends Vehicle {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + ", Type=Truck";
+    public void rent(Customer customer, int days) {
+        if (isAvailableForRental()) {
+            setAvailable(false);
+            System.out.println(customer.getName() + " rented " + getModel() + " for " + days + " days.");
+        } else {
+            System.out.println(getModel() + " is not available for rent.");
+        }
+    }
+
+    @Override
+    public void returnVehicle() {
+        setAvailable(true);
+        System.out.println(getModel() + " has been returned.");
     }
 }

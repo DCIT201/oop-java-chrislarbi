@@ -1,16 +1,15 @@
-package com.ChrisLarbi;
+package ChrisLarbi.VehicleRental;
 
-public class Motorcycle extends Vehicle {
-    private double helmetFee;
+// Concrete Class: Motorcycle
+public class Motorcycle extends Vehicle implements Rentable {
 
-    public Motorcycle(String vehicleId, String model, double baseRentalRate, double helmetFee) {
+    public Motorcycle(String vehicleId, String model, double baseRentalRate) {
         super(vehicleId, model, baseRentalRate);
-        this.helmetFee = helmetFee;
     }
 
     @Override
     public double calculateRentalCost(int days) {
-        return getBaseRentalRate() * days + helmetFee;
+        return getBaseRentalRate() * days;
     }
 
     @Override
@@ -19,7 +18,18 @@ public class Motorcycle extends Vehicle {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + ", Type=Motorcycle";
+    public void rent(Customer customer, int days) {
+        if (isAvailableForRental()) {
+            setAvailable(false);
+            System.out.println(customer.getName() + " rented " + getModel() + " for " + days + " days.");
+        } else {
+            System.out.println(getModel() + " is not available for rent.");
+        }
+    }
+
+    @Override
+    public void returnVehicle() {
+        setAvailable(true);
+        System.out.println(getModel() + " has been returned.");
     }
 }

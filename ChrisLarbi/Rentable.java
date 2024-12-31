@@ -1,6 +1,8 @@
-package com.ChrisLarbi;
+package ChrisLarbi.VehicleRental;
 
-public interface Rentable {
+// Rentable Interface
+interface Rentable {
     void rent(Customer customer, int days);
+
     void returnVehicle();
 }
